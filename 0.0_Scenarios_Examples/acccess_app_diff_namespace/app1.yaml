@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: app1
+  name: app1
+  namespace: ns1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: app1
+    spec:
+      volumes:
+        - name: app1-volume
+          emptyDir: {}
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+        volumeMounts:
+          - name: app1-volume
+            mountPath: /usr/share/nginx/html/
+      initContainers:
+        - name: install
+          image: busybox
+          command:
+            ['sh', '-c', 'echo hello-world-app1 > /app1-volume/index.html']
+          volumeMounts:
+            - name: app1-volume
+              mountPath: "/app1-volume"
