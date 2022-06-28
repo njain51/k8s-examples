@@ -3,15 +3,15 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: app2
-  name: app2
-  namespace: ns2
+    app: app1
+  name: app1
+  namespace: ns1
 spec:
   ports:
-  - port: 8082
-    protocol: TCP
-    targetPort: 80
+    - port: 8081
+      protocol: TCP
+      targetPort: 80
   selector:
-    app: app2
+    app: app1
 status:
   loadBalancer: {}
